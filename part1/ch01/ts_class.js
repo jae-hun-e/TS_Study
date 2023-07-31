@@ -1,43 +1,66 @@
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-var TSClass = /** @class */ (function () {
-    function TSClass() {
-        this.a = "test";
+"use strict";
+class TSClass {
+    constructor() {
+        this._a = "init";
+        this._b = 1;
+        this.c = "기본값이 public";
+    }
+    get a() {
+        return this._a;
+    }
+    get b() {
+        return this._b;
+    }
+    set b(v) {
+        this._b = v;
+    }
+    method() {
+        console.log(this._a);
+        console.log(this._b);
+        console.log(this.c);
+    }
+}
+class inheritClass extends TSClass {
+    method() {
+        console.log(this._a); // error
+        console.log(this.a); // 가능..
+        console.log(this._b);
+        console.log(this.b);
+        console.log(this.c);
+    }
+}
+new inheritClass()._a; // error
+new inheritClass().a; // 가능...
+new inheritClass()._b; // error
+new inheritClass().b; // 가능..
+new inheritClass().c;
+// 추상 클래스
+class AbstractClass {
+    constructor() {
+        this.a = "init";
         this.b = 1;
         this.c = "기본값이 public";
     }
-    TSClass.prototype.method = function () {
+    method2() {
         console.log(this.a);
         console.log(this.b);
         console.log(this.c);
-    };
-    return TSClass;
-}());
-var inheritClass = /** @class */ (function (_super) {
-    __extends(inheritClass, _super);
-    function inheritClass() {
-        return _super !== null && _super.apply(this, arguments) || this;
     }
-    inheritClass.prototype.method = function () {
+}
+class realClass extends AbstractClass {
+    method(a) {
+        console.log(this.a); //error
+        console.log(this.b);
+        console.log(this.c);
+    }
+}
+class inheritAbstractClass extends realClass {
+    method() {
         console.log(this.a); // error
         console.log(this.b);
         console.log(this.c);
-    };
-    return inheritClass;
-}(TSClass));
-new inheritClass().a; // error
-new inheritClass().b; // error
-new inheritClass().c;
+    }
+}
+new inheritAbstractClass().a; // error
+new inheritAbstractClass().b; // error
+new inheritAbstractClass().c;
