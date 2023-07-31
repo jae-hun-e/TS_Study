@@ -14,4 +14,7 @@ const filterfn2 = ["1","2","3",4,5].filter(v => typeof v === 'string')
 const predicate = (value:string|number) : value is string =>typeof  value === 'string'
 const filterfn3 = ["1","2","3",4,5].filter(predicate)
 
-const filterfn4 = ["1","2","3",4,5].filter<string>(v => typeof  v === 'string')
+// const filterfn4 = ["1","2","3",4,5].filter<string>(v => typeof  v === 'string')
+
+
+export {}

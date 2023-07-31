@@ -13,3 +13,4 @@ myForEach2.forEach((item) => console.log(item))
 
 const myForEach3 : Arr<string | number> = ["1","2",3]
 myForEach2.forEach((item) => console.log(item))
+
