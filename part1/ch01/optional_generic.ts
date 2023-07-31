@@ -18,7 +18,7 @@ genericExercise("1", "2"); // "12"
 genericExercise<string>("1", "2"); // "12"
 genericExercise(1, "2"); // error
 
-/** 제네릭의 선언위피는 기본값은 식별자 뒤, 화살표함수는 ()앞이다
+/** 제네릭의 선언위치는 기본값은 식별자 뒤, 화살표함수는 ()앞이다
  * function a<T>() {}
  * class B<T>() {}
  * interface C<T> {}
