@@ -18,6 +18,3 @@ interface Array<T> {
 // map
 const strings = [1, 2, 3].map((value) => value.toString());
 const numbers = [1,2,3].map<number>((v) => v*1)
-
-
-const test = [1,2,3].filter()
