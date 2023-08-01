@@ -29,6 +29,7 @@ const solReduce1 = c.reduce<number>((a, b, idx, arr) => {
   return typeof b === "number" ? (a += b) : a;
 }, 10); // 25
 
-const solReduce2 = c.reduce<number>((a, b, idx, arr) => {
+const solReduce2 = c.reduce((a, b, idx, arr) => {
+  if(typeof a !== 'number'){return parseInt(a)}
   return typeof b === "number" ? (a += b) : a;
-}); // 25
+}); //6
