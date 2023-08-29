@@ -1,5 +1,27 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
 
+interface A {
+    get<T, R = AxiosResponse<T>>(url: string): Promise<R>;
+
+    post<T, R = AxiosResponse<T>, D = any>(url: string, data: D): Promise<R>;
+
+    <T, D, R = AxiosResponse<T>>(config: {
+        method: "post" | "get" | "delete" | "put";
+        url: string;
+        data: D;
+    }): Promise<R>;
+
+    <T, D, R = AxiosResponse<T>>(
+        url: string,
+        config: {
+            method: "post" | "get" | "delete" | "put";
+            data: D;
+        }
+    ): Promise<R>;
+
+    isAxiosError(payload: unknown): payload is AxiosError;
+}
+
 interface Post {
     userId: number;
     id: number;
@@ -12,10 +34,10 @@ interface Data {
     body: string;
     userId: number;
 }
-
+const myAxios: A = axios;
 (async () => {
     try {
-        const response = await axios.get<Post>(
+        const response = await myAxios.get<Post>(
             `https://jsonplaceholder.typicode.com/posts/1`
         );
         console.log(response.data);
@@ -28,22 +50,22 @@ interface Data {
             userId: 1,
         };
 
-        const response2 = await axios.post<Post, AxiosResponse<Post>, Data>(
+        const response2 = await myAxios.post<Post, AxiosResponse<Post>, Data>(
             `https://jsonplaceholder.typicode.com/posts`,
             data
         );
-        const response3 = await axios({
+        const response3 = await myAxios({
             method: "post",
             url: `https://jsonplaceholder.typicode.com/posts`,
             data,
         });
-        const response4 = await axios(`https://jsonplaceholder.typicode.com/posts`, {
+        const response4 = await myAxios(`https://jsonplaceholder.typicode.com/posts`, {
             method: "post",
             data,
         });
     } catch (error) {
         // 커스텀 타입가드2
-        if (axios.isAxiosError(error)) {
+        if (myAxios.isAxiosError(error)) {
             console.error(error.response?.data);
         }
         // 커스텀 타입가드1
